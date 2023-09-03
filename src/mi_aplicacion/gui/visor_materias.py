@@ -24,6 +24,14 @@ class Aplicacion_Gui(QWidget):
         self.txt_profesor.setText(actual["Profesor"])
         self.txt_nota.setText(str(actual["Nota"]))
 
+    def avanzar_materia(self):
+        self.logica.avanzar()
+        self.actualizar_materia()
+
+    def retroceder_materia(self):
+        self.logica.retroceder()
+        self.actualizar_materia()
+
     def inicializar_GUI(self):
         #inicializamos la ventana
         self.setWindowTitle(self.title)
@@ -68,16 +76,18 @@ class Aplicacion_Gui(QWidget):
         #Creamos la caja de botones
         self.caja_botones = QGroupBox()
         distr_caja_botones = QHBoxLayout()
+        self.caja_botones.setFixedHeight(50)
         self.caja_botones.setLayout(distr_caja_botones)
-        
+
         #Creamos los botones para la caja de botones
         self.boton_retroceder = QPushButton("<<")
+        self.boton_retroceder.clicked.connect(self.retroceder_materia)
         self.boton_avanzar = QPushButton(">>")
+        self.boton_avanzar.clicked.connect(self.avanzar_materia)
 
         #Agregamos los botones a la caja de botones
         distr_caja_botones.addWidget(self.boton_retroceder)
-        distr_caja_botones.addWidget(self.boton_avanzar)
-        
+        distr_caja_botones.addWidget(self.boton_avanzar)        
 
         #Agregamos las cajas a nuestra aplicación
         self.distr_vertical.addWidget(self.caja_materias)
