@@ -10,6 +10,9 @@ class Organizador_Materias():
     def dar_materia_actual(self):
         return self.lista_materias[self.actual]
 
+    def aniadir_materia(self, nueva_materia):
+        self.lista_materias.append(nueva_materia)
+
     def avanzar(self):
         self.actual += 1
         self.actual = self.actual % len(self.lista_materias)
