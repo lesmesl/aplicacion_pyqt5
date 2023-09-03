@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QGroupBox, QGridL
 
 class Aplicacion_Gui(QWidget):
 
-    def __init__(self):
+    def __init__(self, logica):
         super().__init__()
 
         #Se establecen las características de la ventana
@@ -11,7 +11,18 @@ class Aplicacion_Gui(QWidget):
         self.top = 80
         self.width = 300
         self.height = 320
+        #Inicializamos la ventana principal
         self.inicializar_GUI()
+        #Asignamos el valor de la lógica
+        self.logica = logica
+        self.actualizar_materia()
+    
+    def actualizar_materia(self):
+        actual = self.logica.dar_materia_actual()
+        self.txt_nombre.setText(actual["Nombre"])
+        self.txt_semestre.setText(actual["Semestre"])
+        self.txt_profesor.setText(actual["Profesor"])
+        self.txt_nota.setText(str(actual["Nota"]))
 
     def inicializar_GUI(self):
         #inicializamos la ventana
